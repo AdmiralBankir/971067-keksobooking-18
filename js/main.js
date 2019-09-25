@@ -9,7 +9,7 @@ var DESC = 'Строка с описанием';
 var PHOTO_SAMPLE = 'http://o0.github.io/assets/images/tokyo/hotel';
 var maxWidthMap = 600;
 var MIN_Y_MAP = 130;
-var MAX_Y_MAP = 160;
+var MAX_Y_MAP = 630;
 
 var randomInt = function (min, max) {
   var rand = min + Math.random() * (max - min);
@@ -38,6 +38,8 @@ var createPhotosArray = function () {
 var createMochForPins = function () {
   var moch = [];
   for (var i = 0; i < 8; i++) {
+    var xCoord = randomInt(0, maxWidthMap);
+    var yCoord = randomInt(MIN_Y_MAP, MAX_Y_MAP);
     moch[i] = {
       author: {
         avatar: AVATAR_SAMPLE + '0' + randomInt(1, 8) + '.png'
@@ -46,7 +48,7 @@ var createMochForPins = function () {
       offer: {
         title: TITLE,
 
-        address: String(location.x + ',' + location.y),
+        address: String(xCoord + ',' + yCoord),
 
         price: randomInt(0, 1000),
 
@@ -68,8 +70,8 @@ var createMochForPins = function () {
       },
 
       location: {
-        x: randomInt(0, maxWidthMap),
-        y: randomInt(MIN_Y_MAP, MAX_Y_MAP)
+        x: xCoord,
+        y: yCoord
       }
     };
   }
@@ -100,7 +102,6 @@ maxWidthMap = map.offsetWidth;
 var pins = createMochForPins();
 
 var mapPins = document.querySelector('.map__pins');
-var mapPinMain = mapPins.querySelector('.map__pin--main');
 var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
 
@@ -109,4 +110,4 @@ for (var i = 0; i < pins.length; i++) {
   fragment.appendChild(createPin(pins[i]));
 }
 
-mapPinMain.appendChild(fragment);
+mapPins.appendChild(fragment);
