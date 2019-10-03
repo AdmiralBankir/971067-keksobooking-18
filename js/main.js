@@ -144,25 +144,19 @@ var setPageState = function (state) {
 
     adForm.classList.remove('ad-form--disabled');
 
-    for (var i = 0; i < adFormFieldsets.length; i++) {
-      adFormFieldsets[i].disabled = false;
-    }
-
-    mapFilters.removeAttribute('disabled');
-
     createPinsOnMap();
 
   } else {
     map.classList.add('map--faded');
 
     adForm.classList.add('ad-form--disabled');
-
-    for (i = 0; i < adFormFieldsets.length; i++) {
-      adFormFieldsets[i].disabled = true;
-    }
-
-    mapFilters.setAttribute('disabled', 'disabled');
   }
+
+  for (var i = 0; i < adFormFieldsets.length; i++) {
+    adFormFieldsets[i].disabled = !state;
+  }
+
+  mapFilters.disabled = !state;
 
   setAddress();
 };
@@ -197,15 +191,9 @@ var setMinPrice = function (select) {
 
 };
 
-var createInputValidity = function () {
-  for (var i = 0; i < inputs.length; i++) {
-    var input = inputs[i];
-    input.addEventListener('invalid', function () {
-    });
-    if (input.id === 'address') {
-      input.setAttribute('disabled', 'disabled');
-    }
-  }
+var disabledAddress = function () {
+  var inputAddress = adForm.querySelector('#address');
+  inputAddress.disabled = true;
 };
 
 var onchangeSelect = function (evt) {
@@ -213,11 +201,11 @@ var onchangeSelect = function (evt) {
   var modifiedOption = modifiedSelect.options[modifiedSelect.selectedIndex];
   var modifiedValue = modifiedOption.value;
 
-  var selectsArr = adFormElementTime.querySelectorAll('select');
+  var selects = adFormElementTime.querySelectorAll('select');
 
-  for (var i = 0; i < selectsArr.length; i++) {
-    if (selectsArr[i].id !== modifiedSelect.id) {
-      selectsArr[i].value = modifiedValue;
+  for (var i = 0; i < selects.length; i++) {
+    if (selects[i].id !== modifiedSelect.id) {
+      selects[i].value = modifiedValue;
       break;
     }
   }
@@ -252,9 +240,9 @@ var onchangeRoomNumber = function () {
   }
 
   for (var i = 0; i < capacityOptions.length; i++) {
-    capacityOptions[i].setAttribute('disabled', 'disabled');
+    capacityOptions[i].disabled = true;
     if (masksAvaliableCapacity.indexOf(Number(capacityOptions[i].value)) !== -1) {
-      capacityOptions[i].removeAttribute('disabled');
+      capacityOptions[i].disabled = false;
     }
   }
 };
@@ -266,7 +254,6 @@ var adFormFieldsets = adForm.querySelectorAll('fieldset');
 var mapFilters = document.querySelector('.map__filters');
 var mapPinMain = map.querySelector('.map__pin--main');
 var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
-var inputs = adForm.querySelectorAll('input');
 var select = adForm.querySelector('#type');
 var adFormElementTime = adForm.querySelector('.ad-form__element--time');
 var roomNumber = adForm.querySelector('#room_number');
@@ -292,4 +279,4 @@ adFormElementTime.addEventListener('change', onchangeSelect);
 
 roomNumber.addEventListener('change', onchangeRoomNumber);
 
-createInputValidity();
+disabledAddress();
