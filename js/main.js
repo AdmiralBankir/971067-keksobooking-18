@@ -150,6 +150,8 @@ var setPageState = function (state) {
 
     mapFilters.removeAttribute('disabled');
 
+    createPinsOnMap();
+
   } else {
     map.classList.add('map--faded');
 
