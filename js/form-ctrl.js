@@ -4,6 +4,9 @@ var adForm = document.querySelector('.ad-form');
 var select = adForm.querySelector('#type');
 var adFormElementTime = adForm.querySelector('.ad-form__element--time');
 var roomNumber = adForm.querySelector('#room_number');
+var map = document.querySelector('.map');
+var mapPinMain = map.querySelector('.map__pin--main');
+var addressInput = adForm.querySelector('#address');
 
 var setMinPrice = function (currentSelect) {
   var minPriceInput = adForm.querySelector('#price');
@@ -88,6 +91,33 @@ var onchangeRoomNumber = function () {
     if (masksAvaliableCapacity.indexOf(Number(capacityOptions[i].value)) !== -1) {
       capacityOptions[i].disabled = false;
     }
+  }
+};
+
+var getAddressFromPin = function () {
+  var xCoordPin = mapPinMain.offsetLeft;
+  var yCoordPin = mapPinMain.offsetTop;
+
+  var xCoordAddress = xCoordPin + 0.5 * mapPinMain.offsetWidth;
+  var yCoordAddress;
+
+  if (map.classList.contains('map--faded')) {
+    yCoordAddress = yCoordPin + 0.5 * mapPinMain.offsetWidth;
+  } else {
+    yCoordAddress = yCoordPin + mapPinMain.offsetWidth;
+  }
+
+  yCoordAddress = (yCoordAddress > window.MAX_Y_MAP) ? window.MAX_Y_MAP : yCoordAddress;
+  yCoordAddress = (yCoordAddress < window.MIN_Y_MAP) ? window.MIN_Y_MAP : yCoordAddress;
+
+  xCoordAddress = (xCoordAddress > map.offsetWidth) ? map.offsetWidth : xCoordAddress;
+
+  return String(Math.floor(xCoordAddress) + ',' + ' ' + Math.floor(yCoordAddress));
+};
+
+window.formCtrl = {
+  setAddress: function () {
+    addressInput.value = getAddressFromPin();
   }
 };
 
