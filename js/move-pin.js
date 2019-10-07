@@ -1,6 +1,21 @@
 'use strict';
 
 var mapPinMain = document.querySelector('.map__pin--main');
+var map = document.querySelector('.map');
+
+var checkCoord = function (pin) {
+  var bottomBorder = window.MAX_Y_MAP - mapPinMain.offsetHeight;
+  var topBorder = window.MIN_Y_MAP - mapPinMain.offsetHeight;
+
+  pin.yCoord = (pin.yCoord > bottomBorder) ? bottomBorder : pin.yCoord;
+  pin.yCoord = (pin.yCoord < topBorder) ? topBorder : pin.yCoord;
+
+  var rightBorder = map.offsetWidth - 0.5 * mapPinMain.offsetWidth;
+  var leftBorder = -0.5 * mapPinMain.offsetWidth;
+
+  pin.xCoord = (pin.xCoord > rightBorder) ? rightBorder : pin.xCoord;
+  pin.xCoord = (pin.xCoord < leftBorder) ? leftBorder : pin.xCoord;
+};
 
 mapPinMain.addEventListener('mousedown', function (evt) {
   evt.preventDefault();
@@ -21,8 +36,15 @@ mapPinMain.addEventListener('mousedown', function (evt) {
     startCoords.x = moveEvt.clientX;
     startCoords.y = moveEvt.clientY;
 
-    mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
-    mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
+    var pin = {
+      xCoord: mapPinMain.offsetLeft - shift.x,
+      yCoord: mapPinMain.offsetTop - shift.y
+    };
+
+    checkCoord(pin);
+
+    mapPinMain.style.top = pin.yCoord + 'px';
+    mapPinMain.style.left = pin.xCoord + 'px';
 
     window.formCtrl.setAddress();
   };
