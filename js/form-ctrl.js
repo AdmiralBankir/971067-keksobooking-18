@@ -99,18 +99,13 @@ var getAddressFromPin = function () {
   var yCoordPin = mapPinMain.offsetTop;
 
   var xCoordAddress = xCoordPin + 0.5 * mapPinMain.offsetWidth;
-  var yCoordAddress;
+  var yCoordAddress = 0;
 
   if (map.classList.contains('map--faded')) {
     yCoordAddress = yCoordPin + 0.5 * mapPinMain.offsetWidth;
   } else {
     yCoordAddress = yCoordPin + mapPinMain.offsetWidth;
   }
-
-  yCoordAddress = (yCoordAddress > window.MAX_Y_MAP) ? window.MAX_Y_MAP : yCoordAddress;
-  yCoordAddress = (yCoordAddress < window.MIN_Y_MAP) ? window.MIN_Y_MAP : yCoordAddress;
-
-  xCoordAddress = (xCoordAddress > map.offsetWidth) ? map.offsetWidth : xCoordAddress;
 
   return String(Math.floor(xCoordAddress) + ',' + ' ' + Math.floor(yCoordAddress));
 };
