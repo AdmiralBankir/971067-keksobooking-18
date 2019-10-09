@@ -90,7 +90,7 @@ var createPin = function (pinAttr) {
   return pin;
 };
 
-window.createPins = {
+window.ctrlPins = {
   createPinsOnMap: function () {
     maxWidthMap = map.offsetWidth;
     var pins = createMochForPins();
@@ -104,5 +104,13 @@ window.createPins = {
     }
 
     mapPins.appendChild(fragment);
+  },
+
+  removePinsOnMap: function () {
+    var pins = map.querySelectorAll('.map__pin');
+    for (var i = pins.length - 1; i >= 0; i--) {
+      var pin = pins[i];
+      pin.parentElement.removeChild(pin);
+    }
   }
 };

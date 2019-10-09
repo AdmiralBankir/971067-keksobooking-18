@@ -123,3 +123,11 @@ select.addEventListener('change', function () {
 adFormElementTime.addEventListener('change', onchangeSelect);
 
 roomNumber.addEventListener('change', onchangeRoomNumber);
+
+adForm.addEventListener('submit', function (evt) {
+  evt.preventDefault();
+  window.upload(new FormData(adForm), function () {
+    window.pageStateCtrl.disactivatePage();
+    window.ctrlPins.removePinsOnMap();
+  });
+});

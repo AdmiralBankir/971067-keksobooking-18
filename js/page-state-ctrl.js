@@ -21,7 +21,7 @@ var setPageState = function (state) {
   }
 
   if (flagCreatePins) {
-    window.createPins.createPinsOnMap();
+    window.ctrlPins.createPinsOnMap();
     flagCreatePins = false;
   }
 
@@ -45,3 +45,9 @@ mapPinMain.addEventListener('mousedown', function () {
 mapPinMain.addEventListener('keydown', function (evt) {
   window.util.isEnterEvent(evt, setPageState(true));
 });
+
+window.pageStateCtrl = {
+  disactivatePage: function () {
+    setPageState(false);
+  }
+};
