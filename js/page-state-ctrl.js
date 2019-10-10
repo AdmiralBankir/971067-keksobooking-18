@@ -14,6 +14,8 @@ var setPageState = function (state) {
 
     adForm.classList.remove('ad-form--disabled');
 
+    window.formCtrl.initCapacity();
+
   } else {
     map.classList.add('map--faded');
 

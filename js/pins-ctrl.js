@@ -7,6 +7,8 @@ var CHECK_IN_OR_OUT = ['12:00', '13:00', '14:00'];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 var DESC = 'Строка с описанием';
 var PHOTO_SAMPLE = 'http://o0.github.io/assets/images/tokyo/hotel';
+var INIT_LEFT = 570;
+var INIT_TOP = 375;
 var maxWidthMap = 600;
 
 var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
@@ -110,7 +112,16 @@ window.ctrlPins = {
     var pins = map.querySelectorAll('.map__pin');
     for (var i = pins.length - 1; i >= 0; i--) {
       var pin = pins[i];
+      if (pin.classList.contains('map__pin--main')) {
+        break;
+      }
       pin.parentElement.removeChild(pin);
     }
+  },
+
+  resetMainPin: function () {
+    var pinMain = map.querySelector('.map__pin--main');
+    pinMain.style = 'left:' + INIT_LEFT + 'px;' + 'top:' + INIT_TOP + 'px;';
+    window.formCtrl.setAddress();
   }
 };

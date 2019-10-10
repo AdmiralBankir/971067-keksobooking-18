@@ -40,7 +40,7 @@ var setMinPrice = function (currentSelect) {
 
 (function () {
   var inputAddress = adForm.querySelector('#address');
-  inputAddress.disabled = true;
+  inputAddress.readOnly = true;
 })();
 
 var onchangeSelect = function (evt) {
@@ -113,8 +113,21 @@ var getAddressFromPin = function () {
 window.formCtrl = {
   setAddress: function () {
     addressInput.value = getAddressFromPin();
+  },
+
+  initCapacity: function () {
+    onchangeRoomNumber();
   }
 };
+
+var resetInputs = function () {
+  var inputs = adForm.querySelectorAll('input');
+
+  for (var i = 0; i < inputs.length; i++) {
+    inputs[i].value = '';
+  }
+};
+
 
 select.addEventListener('change', function () {
   setMinPrice(select);
@@ -129,5 +142,7 @@ adForm.addEventListener('submit', function (evt) {
   window.upload(new FormData(adForm), function () {
     window.pageStateCtrl.disactivatePage();
     window.ctrlPins.removePinsOnMap();
+    resetInputs();
+    window.ctrlPins.resetMainPin();
   });
 });
