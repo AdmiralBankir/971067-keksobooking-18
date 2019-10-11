@@ -140,7 +140,7 @@ roomNumber.addEventListener('change', onchangeRoomNumber);
 adForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
   window.upload(new FormData(adForm), function () {
-    window.pageStateCtrl.disactivatePage();
+    window.pageStateCtrl.deactivatePage();
     window.ctrlPins.removePinsOnMap();
     resetInputs();
     window.ctrlPins.resetMainPin();

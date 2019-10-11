@@ -49,7 +49,8 @@ mapPinMain.addEventListener('keydown', function (evt) {
 });
 
 window.pageStateCtrl = {
-  disactivatePage: function () {
+  deactivatePage: function () {
     setPageState(false);
+    flagCreatePins = true;
   }
 };
