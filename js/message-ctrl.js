@@ -9,11 +9,13 @@ window.messageCtrl = {
     var onRemoveElementKeydown = function (evt) {
       window.util.isEnterEvent(evt, window.util.removeElement(popupMessage));
       window.removeEventListener('keydown', onRemoveElementKeydown);
+      window.removeEventListener('click', onRemoveElementClick);
     };
 
     var onRemoveElementClick = function () {
       window.util.removeElement(popupMessage);
       window.removeEventListener('click', onRemoveElementClick);
+      window.removeEventListener('keydown', onRemoveElementKeydown);
     };
 
     if (errorText !== null) {
