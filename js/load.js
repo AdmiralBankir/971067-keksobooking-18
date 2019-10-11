@@ -1,8 +1,9 @@
 'use strict';
 
 var error = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
+var url = 'https://js.dump.academy/keksobooking/data';
 
-window.load = function (url, onSuccess) {
+window.load = function (onSuccess) {
   var xhr = new XMLHttpRequest();
   var message;
 
