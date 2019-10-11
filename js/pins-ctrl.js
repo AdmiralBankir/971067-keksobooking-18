@@ -26,7 +26,7 @@ var createPin = function (pinAttr) {
 window.ctrlPins = {
   createPinsOnMap: function () {
     var mapPins = document.querySelector('.map__pins');
-    window.load(function (pins) {
+    window.sendRequest(window.urlLoad, 0, 'load', function (pins) {
       var fragment = document.createDocumentFragment();
       for (var i = 0; i < pins.length; i++) {
         fragment.appendChild(createPin(pins[i]));
