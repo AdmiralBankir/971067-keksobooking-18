@@ -2,7 +2,7 @@
 
 window.messageCtrl = {
 
-  sendMessage: function (popupMessage, textMessage) {
+  sendMessage: function (popupMessage, textMessage, type) {
 
     var errorText = popupMessage.querySelector('.error__message');
 
@@ -20,7 +20,9 @@ window.messageCtrl = {
 
     if (errorText !== null) {
       errorText.innerHTML = errorText.innerHTML + '. ' + textMessage;
-      window.pageStateCtrl.deactivatePage();
+      if (type === 'load') {
+        window.pageStateCtrl.deactivatePage();
+      }
     }
 
     document.querySelector('.map').appendChild(popupMessage);

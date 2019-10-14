@@ -4,8 +4,6 @@ window.MIN_Y_MAP = 130;
 window.MAX_Y_MAP = 630;
 var ENTER_KEYCODE = 13;
 var ESC_KEYCODE = 27;
-window.urlUpLoad = 'https://js.dump.academy/keksobooking';
-window.urlLoad = 'https://js.dump.academy/keksobooking/data';
 
 window.util = {
   isEnterEvent: function (evt, action) {
