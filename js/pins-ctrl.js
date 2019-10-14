@@ -33,12 +33,9 @@ window.ctrlPins = {
   },
 
   removePinsOnMap: function () {
-    var pins = map.querySelectorAll('.map__pin');
+    var pins = map.querySelectorAll('.map__pin:not(.map__pin--main)');
     for (var i = pins.length - 1; i >= 0; i--) {
       var pin = pins[i];
-      if (pin.classList.contains('map__pin--main')) {
-        break;
-      }
       pin.parentElement.removeChild(pin);
     }
   },
