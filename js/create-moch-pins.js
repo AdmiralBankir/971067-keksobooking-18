@@ -7,10 +7,7 @@ var CHECK_IN_OR_OUT = ['12:00', '13:00', '14:00'];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 var DESC = 'Строка с описанием';
 var PHOTO_SAMPLE = 'http://o0.github.io/assets/images/tokyo/hotel';
-var url = 'https://js.dump.academy/keksobooking/data';
 var maxWidthMap = 600;
-
-var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
 var createFeaturesArray = function () {
   var features = [];
@@ -30,7 +27,7 @@ var createPhotosArray = function () {
   return photos;
 };
 
-(function () {
+window.mochPinsCtrl.createMochForPins = function () {
   var moch = [];
   for (var i = 0; i < 8; i++) {
     var xCoord = window.util.randomInt(0, maxWidthMap);
@@ -71,35 +68,4 @@ var createPhotosArray = function () {
     };
   }
   return moch;
-})();
-
-var createPin = function (pinAttr) {
-  var pin = pinTemplate.cloneNode(true);
-  var img = pin.querySelector('img');
-
-  var pinWidth = img.width;
-  var pinHeight = img.height;
-
-  var leftPosition = pinAttr.location.x - pinWidth / 2;
-  var topPosition = pinAttr.location.y - pinHeight;
-
-  pin.style = 'left:' + leftPosition + 'px;' + 'top:' + topPosition + 'px;';
-  img.src = pinAttr.author.avatar;
-  img.alt = pinAttr.offer.title;
-
-  return pin;
-};
-
-window.createPins = {
-  createPinsOnMap: function () {
-    var mapPins = document.querySelector('.map__pins');
-
-    window.load(url, function (pins) {
-      var fragment = document.createDocumentFragment();
-      for (var i = 0; i < pins.length; i++) {
-        fragment.appendChild(createPin(pins[i]));
-      }
-      mapPins.appendChild(fragment);
-    });
-  }
 };

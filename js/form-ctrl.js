@@ -40,7 +40,7 @@ var setMinPrice = function (currentSelect) {
 
 (function () {
   var inputAddress = adForm.querySelector('#address');
-  inputAddress.disabled = true;
+  inputAddress.readOnly = true;
 })();
 
 var onchangeSelect = function (evt) {
@@ -113,8 +113,21 @@ var getAddressFromPin = function () {
 window.formCtrl = {
   setAddress: function () {
     addressInput.value = getAddressFromPin();
+  },
+
+  initCapacity: function () {
+    onchangeRoomNumber();
   }
 };
+
+var resetInputs = function () {
+  var inputs = adForm.querySelectorAll('input');
+
+  for (var i = 0; i < inputs.length; i++) {
+    inputs[i].value = '';
+  }
+};
+
 
 select.addEventListener('change', function () {
   setMinPrice(select);
@@ -123,3 +136,13 @@ select.addEventListener('change', function () {
 adFormElementTime.addEventListener('change', onchangeSelect);
 
 roomNumber.addEventListener('change', onchangeRoomNumber);
+
+adForm.addEventListener('submit', function (evt) {
+  evt.preventDefault();
+  window.sendRequest(new FormData(adForm), 'upload', function () {
+    window.pageStateCtrl.deactivatePage();
+    window.ctrlPins.removePinsOnMap();
+    resetInputs();
+    window.ctrlPins.resetMainPin();
+  });
+});

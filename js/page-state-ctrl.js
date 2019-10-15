@@ -14,6 +14,8 @@ var setPageState = function (state) {
 
     adForm.classList.remove('ad-form--disabled');
 
+    window.formCtrl.initCapacity();
+
   } else {
     map.classList.add('map--faded');
 
@@ -21,7 +23,7 @@ var setPageState = function (state) {
   }
 
   if (flagCreatePins) {
-    window.createPins.createPinsOnMap();
+    window.ctrlPins.createPinsOnMap();
     flagCreatePins = false;
   }
 
@@ -45,3 +47,10 @@ mapPinMain.addEventListener('mousedown', function () {
 mapPinMain.addEventListener('keydown', function (evt) {
   window.util.isEnterEvent(evt, setPageState(true));
 });
+
+window.pageStateCtrl = {
+  deactivatePage: function () {
+    setPageState(false);
+    flagCreatePins = true;
+  }
+};
