@@ -22,12 +22,16 @@ var createPin = function (pinAttr) {
 };
 
 window.renderPins = function (pins) {
-  var mapPins = document.querySelector('.map__pins');
-  var fragment = document.createDocumentFragment();
-  for (var i = 0; i < 5; i++) {
-    fragment.appendChild(createPin(pins[i]));
+  if (pins.length !== 0) {
+    var mapPins = document.querySelector('.map__pins');
+    var fragment = document.createDocumentFragment();
+    for (var i = 0; i < 5; i++) {
+      fragment.appendChild(createPin(pins[i]));
+    }
+    mapPins.appendChild(fragment);
+  } else {
+    window.ctrlPins.removePinsOnMap();
   }
-  mapPins.appendChild(fragment);
 };
 
 window.ctrlPins = {
