@@ -1,5 +1,6 @@
 'use strict';
 var map = document.querySelector('.map');
+window.dataPins = [];
 
 var createPin = function (pinAttr) {
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
@@ -20,15 +21,24 @@ var createPin = function (pinAttr) {
   return pin;
 };
 
+window.renderPins = function (pins) {
+  if (pins.length !== 0) {
+    var mapPins = document.querySelector('.map__pins');
+    var fragment = document.createDocumentFragment();
+    for (var i = 0; i < 5; i++) {
+      fragment.appendChild(createPin(pins[i]));
+    }
+    mapPins.appendChild(fragment);
+  } else {
+    window.ctrlPins.removePinsOnMap();
+  }
+};
+
 window.ctrlPins = {
   createPinsOnMap: function () {
-    var mapPins = document.querySelector('.map__pins');
     window.sendRequest(null, 'load', function (pins) {
-      var fragment = document.createDocumentFragment();
-      for (var i = 0; i < pins.length; i++) {
-        fragment.appendChild(createPin(pins[i]));
-      }
-      mapPins.appendChild(fragment);
+      window.dataPins = pins.slice();
+      window.renderPins(pins);
     });
   },
 
