@@ -23,9 +23,10 @@ var createPin = function (pinAttr) {
 
 window.renderPins = function (pins) {
   if (pins.length !== 0) {
+    var lenPin = (pins.length > 5) ? 5 : pins.length;
     var mapPins = document.querySelector('.map__pins');
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < lenPin; i++) {
       fragment.appendChild(createPin(pins[i]));
     }
     mapPins.appendChild(fragment);
