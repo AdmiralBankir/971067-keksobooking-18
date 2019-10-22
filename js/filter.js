@@ -39,8 +39,8 @@
       return checkbox.checked;
     });
 
-    features.forEach(function (element) {
-      filterOption.features.value.push(element.value);
+    filterOption.features.value = features.map(function (feature) {
+      return feature.value;
     });
 
     var keys = Object.keys(filterOption);
@@ -65,7 +65,7 @@
 
   var isMatchingFeatures = function (pin) {
     return (filterOption.features.value.every(function (element) {
-      return (pin.offer.features.indexOf(element) + 1);
+      return (pin.offer.features.includes(element));
     }));
   };
 
@@ -79,17 +79,12 @@
 
   var isMatchingPin = function (pin) {
     var activeOptions = Object.keys(filterOption);
-    var matching = 0;
 
-    activeOptions.forEach(function (option) {
-      matching += filterOption[option].handler(pin, option);
+    var matching = activeOptions.every(function (option) {
+      return filterOption[option].handler(pin, option);
     });
 
-    if (matching !== activeOptions.length) {
-      return false;
-    }
-
-    return true;
+    return matching;
   };
 
 
