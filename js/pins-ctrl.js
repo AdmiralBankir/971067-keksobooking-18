@@ -43,6 +43,7 @@
       window.sendRequest(null, 'load', function (pins) {
         window.dataPins = pins.slice();
         window.renderPins(pins);
+        window.createCard(pins[0]);
       });
     },
 
