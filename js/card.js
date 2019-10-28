@@ -11,6 +11,8 @@
 
   var featureList = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
+  var map = document.querySelector('.map');
+
   window.createCard = function (cardAttr) {
     var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
     var card = cardTemplate.cloneNode(true);
@@ -42,9 +44,22 @@
     var avatar = card.querySelector('.popup__avatar');
     avatar.src = cardAttr.author.avatar;
 
-    var map = document.querySelector('.map');
     var mapFilters = map.querySelector('.map__filters-container');
     map.insertBefore(card, mapFilters);
+
+    createCardListener(card);
+  };
+
+  var createCardListener = function (card) {
+    var closeBtn = card.querySelector('.popup__close');
+
+    closeBtn.addEventListener('click', function () {
+      window.removeCard();
+    });
+
+    window.addEventListener('keydown', function (evt) {
+      window.util.isEscEvent(evt, window.removeCard);
+    });
   };
 
   var setCardCapacity = function (card, rooms, guests) {
@@ -90,6 +105,13 @@
       photosContainer.appendChild(sample);
     });
     window.util.removeElement(photoImg);
+  };
+
+  window.removeCard = function () {
+    var card = map.querySelector('.map__card');
+    if (card !== null) {
+      window.util.removeElement(card);
+    }
   };
 
 })();
