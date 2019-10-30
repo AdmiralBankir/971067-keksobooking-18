@@ -2,14 +2,14 @@
 
 (function () {
 
-  var typeList = {
+  var TYPE_LIST = {
     bungalo: 'Бунгало',
     flat: 'Квартира',
     house: 'Дом',
     palace: 'Дворец'
   };
 
-  var featureList = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+  var FEATURE_LIST = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
   var map = document.querySelector('.map');
 
@@ -28,7 +28,7 @@
     price.innerHTML += '&#x20bd;<span>/ночь</span>';
 
     var type = card.querySelector('.popup__type');
-    type.textContent = typeList[cardAttr.offer.type];
+    type.textContent = TYPE_LIST[cardAttr.offer.type];
 
     setCardCapacity(card, cardAttr.offer.rooms, cardAttr.offer.guests);
 
@@ -88,7 +88,7 @@
   };
 
   var setCardFeatures = function (card, features) {
-    featureList.forEach(function (feature) {
+    FEATURE_LIST.forEach(function (feature) {
       var featureListElement = card.querySelector('.popup__feature' + '--' + feature);
       if (!features.includes(feature)) {
         window.util.removeElement(featureListElement);

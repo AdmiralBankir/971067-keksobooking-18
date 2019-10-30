@@ -1,56 +1,58 @@
 'use strict';
 
-var map = document.querySelector('.map');
-var adForm = document.querySelector('.ad-form');
-var adFormFieldsets = adForm.querySelectorAll('fieldset');
-var mapFilters = document.querySelector('.map__filters');
-var mapPinMain = map.querySelector('.map__pin--main');
-var flagCreatePins = false;
+(function () {
+  var map = document.querySelector('.map');
+  var adForm = document.querySelector('.ad-form');
+  var adFormFieldsets = adForm.querySelectorAll('fieldset');
+  var mapFilters = document.querySelector('.map__filters');
+  var mapPinMain = map.querySelector('.map__pin--main');
+  var flagCreatePins = false;
 
-var setPageState = function (state) {
+  var setPageState = function (state) {
 
-  if (state) {
-    map.classList.remove('map--faded');
+    if (state) {
+      map.classList.remove('map--faded');
 
-    adForm.classList.remove('ad-form--disabled');
+      adForm.classList.remove('ad-form--disabled');
 
-    window.formCtrl.initCapacity();
+      window.formCtrl.initCapacity();
 
-  } else {
-    map.classList.add('map--faded');
+    } else {
+      map.classList.add('map--faded');
 
-    adForm.classList.add('ad-form--disabled');
-  }
+      adForm.classList.add('ad-form--disabled');
+    }
 
-  if (flagCreatePins) {
-    window.ctrlPins.createPinsOnMap();
-    flagCreatePins = false;
-  }
+    if (flagCreatePins) {
+      window.ctrlPins.createPinsOnMap();
+      flagCreatePins = false;
+    }
 
-  for (var i = 0; i < adFormFieldsets.length; i++) {
-    adFormFieldsets[i].disabled = !state;
-  }
+    for (var i = 0; i < adFormFieldsets.length; i++) {
+      adFormFieldsets[i].disabled = !state;
+    }
 
-  mapFilters.disabled = !state;
+    mapFilters.disabled = !state;
 
-  window.formCtrl.setAddress();
-};
+    window.formCtrl.setAddress();
+  };
 
-setPageState(false);
+  setPageState(false);
 
-flagCreatePins = true;
+  flagCreatePins = true;
 
-mapPinMain.addEventListener('mousedown', function () {
-  setPageState(true);
-});
+  mapPinMain.addEventListener('mousedown', function () {
+    setPageState(true);
+  });
 
-mapPinMain.addEventListener('keydown', function (evt) {
-  window.util.isEnterEvent(evt, setPageState(true));
-});
+  mapPinMain.addEventListener('keydown', function (evt) {
+    window.util.isEnterEvent(evt, setPageState(true));
+  });
 
-window.pageStateCtrl = {
-  deactivatePage: function () {
-    setPageState(false);
-    flagCreatePins = true;
-  }
-};
+  window.pageStateCtrl = {
+    deactivatePage: function () {
+      setPageState(false);
+      flagCreatePins = true;
+    }
+  };
+})();
