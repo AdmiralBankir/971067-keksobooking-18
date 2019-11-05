@@ -20,7 +20,7 @@
       };
 
       if (errorText !== null) {
-        errorText.innerHTML = errorText.innerHTML + '. ' + textMessage;
+        errorText.textContent += '. ' + textMessage;
         if (type === 'load') {
           window.pageStateCtrl.deactivatePage();
         }

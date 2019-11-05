@@ -3,7 +3,7 @@
 (function () {
   var map = document.querySelector('.map');
   window.dataPins = [];
-  var numberOfPins = 5;
+  var NUMBER_OF_PINS = 5;
 
   var addClickListener = function (mapPin, dataPin) {
     mapPin.addEventListener('click', function () {
@@ -40,7 +40,7 @@
 
   window.renderPins = function (pins) {
     if (pins.length !== 0) {
-      var lenPin = (pins.length > numberOfPins) ? numberOfPins : pins.length;
+      var lenPin = (pins.length > NUMBER_OF_PINS) ? NUMBER_OF_PINS : pins.length;
       var mapPins = document.querySelector('.map__pins');
       var fragment = document.createDocumentFragment();
       for (var i = 0; i < lenPin; i++) {

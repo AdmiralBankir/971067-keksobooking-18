@@ -51,12 +51,11 @@
 
     var selects = adFormElementTime.querySelectorAll('select');
 
-    for (var i = 0; i < selects.length; i++) {
-      if (selects[i].id !== modifiedSelect.id) {
-        selects[i].value = modifiedValue;
-        break;
+    selects.forEach(function (it) {
+      if (it.id !== modifiedSelect.id) {
+        it.value = modifiedValue;
       }
-    }
+    });
   };
 
   var onchangeRoomNumber = function () {
@@ -87,12 +86,12 @@
         break;
     }
 
-    for (var i = 0; i < capacityOptions.length; i++) {
-      capacityOptions[i].disabled = true;
-      if (masksAvaliableCapacity.indexOf(Number(capacityOptions[i].value)) !== -1) {
-        capacityOptions[i].disabled = false;
+    capacityOptions.forEach(function (it) {
+      it.disabled = true;
+      if (masksAvaliableCapacity.indexOf(Number(it.value)) !== -1) {
+        it.disabled = false;
       }
-    }
+    });
   };
 
   var getAddressFromPin = function () {
@@ -123,10 +122,9 @@
 
   var resetInputs = function () {
     var inputs = adForm.querySelectorAll('input');
-
-    for (var i = 0; i < inputs.length; i++) {
-      inputs[i].value = '';
-    }
+    inputs.forEach(function (it) {
+      it.value = '';
+    });
   };
 
 
