@@ -12,9 +12,9 @@
   var FEATURE_LIST = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
   var map = document.querySelector('.map');
+  var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 
   window.createCard = function (cardAttr) {
-    var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
     var card = cardTemplate.cloneNode(true);
 
     var title = card.querySelector('.popup__title');

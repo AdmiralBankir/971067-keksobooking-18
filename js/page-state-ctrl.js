@@ -28,9 +28,9 @@
       flagCreatePins = false;
     }
 
-    for (var i = 0; i < adFormFieldsets.length; i++) {
-      adFormFieldsets[i].disabled = !state;
-    }
+    adFormFieldsets.forEach(function (it) {
+      it.disabled = !state;
+    });
 
     mapFilters.disabled = !state;
 

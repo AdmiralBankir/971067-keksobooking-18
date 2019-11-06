@@ -8,6 +8,7 @@
   var map = document.querySelector('.map');
   var mapPinMain = map.querySelector('.map__pin--main');
   var addressInput = adForm.querySelector('#address');
+  var inputs = adForm.querySelectorAll('input');
 
   var setMinPrice = function (currentSelect) {
     var minPriceInput = adForm.querySelector('#price');
@@ -58,7 +59,7 @@
     });
   };
 
-  var onchangeRoomNumber = function () {
+  var onChange = function () {
     var currentOption = roomNumber.options[roomNumber.selectedIndex];
     var capacityOfRoom = adForm.querySelector('#capacity');
     var capacityOptions = capacityOfRoom.querySelectorAll('option');
@@ -116,12 +117,11 @@
     },
 
     initCapacity: function () {
-      onchangeRoomNumber();
+      onChange();
     }
   };
 
   var resetInputs = function () {
-    var inputs = adForm.querySelectorAll('input');
     inputs.forEach(function (it) {
       it.value = '';
     });
@@ -134,7 +134,7 @@
 
   adFormElementTime.addEventListener('change', onchangeSelect);
 
-  roomNumber.addEventListener('change', onchangeRoomNumber);
+  roomNumber.addEventListener('change', onChange);
 
   adForm.addEventListener('submit', function (evt) {
     evt.preventDefault();

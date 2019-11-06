@@ -21,11 +21,6 @@
 
     removeElement: function (element) {
       element.parentElement.removeChild(element);
-    },
-
-    randomInt: function (min, max) {
-      var rand = min + Math.random() * (max - min);
-      return Math.floor(rand);
     }
   };
 })();
