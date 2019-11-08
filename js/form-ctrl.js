@@ -10,34 +10,11 @@
   var addressInput = adForm.querySelector('#address');
   var inputs = adForm.querySelectorAll('input');
 
-  var setMinPrice = function (currentSelect) {
-    var minPriceInput = adForm.querySelector('#price');
-    var minPrice;
-    var currentOption = currentSelect.options[select.selectedIndex];
-    switch (currentOption.value) {
-      case 'bungalo':
-        minPrice = 0;
-        break;
-
-      case 'flat':
-        minPrice = 1000;
-        break;
-
-      case 'house':
-        minPrice = 5000;
-        break;
-
-      case 'palace':
-        minPrice = 10000;
-        break;
-
-      default:
-        break;
-    }
-
-    minPriceInput.min = minPrice;
-    minPriceInput.placeholder = minPrice;
-
+  var MIN_PRICE_FOR_TYPE = {
+    'bungalo': 0,
+    'flat': 1000,
+    'house': 5000,
+    'palace': 10000
   };
 
   (function () {
@@ -120,6 +97,16 @@
 
     initCapacity: function () {
       onChange();
+    },
+
+    setMinPrice: function (currentSelect) {
+      var minPriceInput = adForm.querySelector('#price');
+      var currentOption = currentSelect.options[select.selectedIndex];
+      var minPrice = MIN_PRICE_FOR_TYPE[currentOption.value];
+
+      minPriceInput.min = minPrice;
+      minPriceInput.placeholder = minPrice;
+
     }
   };
 
@@ -131,7 +118,7 @@
 
 
   select.addEventListener('change', function () {
-    setMinPrice(select);
+    window.formCtrl.setMinPrice(select);
   });
 
   adFormElementTime.addEventListener('change', onchangeSelect);

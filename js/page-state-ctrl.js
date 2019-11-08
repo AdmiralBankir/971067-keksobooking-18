@@ -6,6 +6,7 @@
   var adFormFieldsets = adForm.querySelectorAll('fieldset');
   var mapFilters = document.querySelector('.map__filters');
   var mapPinMain = map.querySelector('.map__pin--main');
+  var select = adForm.querySelector('#type');
   var flagCreatePins = false;
 
   var setPageState = function (state) {
@@ -35,6 +36,8 @@
     mapFilters.disabled = !state;
 
     window.formCtrl.setAddress();
+
+    window.formCtrl.setMinPrice(select);
   };
 
   setPageState(false);
