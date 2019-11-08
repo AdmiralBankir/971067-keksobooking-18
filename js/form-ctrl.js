@@ -88,8 +88,10 @@
     }
 
     capacityOptions.forEach(function (it) {
-      it.disabled = true;
-      if (masksAvaliableCapacity.indexOf(Number(it.value)) !== -1) {
+      if (masksAvaliableCapacity.indexOf(Number(it.value)) === -1) {
+        it.disabled = true;
+        it.selected = false;
+      } else {
         it.disabled = false;
       }
     });
