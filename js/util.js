@@ -1,8 +1,6 @@
 'use strict';
 
 (function () {
-  window.MIN_Y_MAP = 130;
-  window.MAX_Y_MAP = 630;
   var ENTER_KEYCODE = 13;
   var ESC_KEYCODE = 27;
 
@@ -21,6 +19,9 @@
 
     removeElement: function (element) {
       element.parentElement.removeChild(element);
-    }
+    },
+
+    MIN_Y_MAP: 130,
+    MAX_Y_MAP: 630
   };
 })();

@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  var SUCCESS_SERVER_CONNECTION = 200;
+
   window.sendRequest = function (data, type, onSuccess) {
     var urlUpLoad = 'https://js.dump.academy/keksobooking';
     var urlLoad = 'https://js.dump.academy/keksobooking/data';
@@ -13,7 +15,7 @@
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
+      if (xhr.status === SUCCESS_SERVER_CONNECTION) {
         onSuccess(xhr.response);
         if (type === 'upload') {
           window.messageCtrl.sendMessage(success);

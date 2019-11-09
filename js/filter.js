@@ -90,7 +90,7 @@
 
   var updatePins = window.debounce(function () {
     window.ctrlPins.removePinsOnMap();
-    window.renderPins(window.dataPins.slice().filter(isMatchingPin));
+    window.ctrlPins.renderPins(window.dataPins.slice().filter(isMatchingPin));
   });
 
   var letsFilter = function () {

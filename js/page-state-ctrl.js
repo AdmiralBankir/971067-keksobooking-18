@@ -63,6 +63,7 @@
       window.formCtrl.resetForm();
       window.ctrlPins.removePinsOnMap();
       window.ctrlPins.resetMainPin();
+      window.reloadFiles();
     }
   };
 

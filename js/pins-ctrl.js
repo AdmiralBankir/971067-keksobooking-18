@@ -1,15 +1,18 @@
 'use strict';
 
 (function () {
+  var NUMBER_OF_PINS = 5;
+  var INIT_LEFT_MAIN_PIN = 570;
+  var INIT_TOP_MAIN_PIN = 375;
+
   var map = document.querySelector('.map');
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
   window.dataPins = [];
-  var NUMBER_OF_PINS = 5;
 
   var addClickListener = function (mapPin, dataPin) {
     mapPin.addEventListener('click', function () {
-      window.removeCard();
-      window.createCard(dataPin);
+      window.card.removeCard();
+      window.card.createCard(dataPin);
     });
   };
 
@@ -31,27 +34,27 @@
     return pin;
   };
 
-  window.renderPins = function (pins) {
-    if (pins.length !== 0) {
-      var lenPin = (pins.length > NUMBER_OF_PINS) ? NUMBER_OF_PINS : pins.length;
-      var mapPins = document.querySelector('.map__pins');
-      var fragment = document.createDocumentFragment();
-      for (var i = 0; i < lenPin; i++) {
-        var newPin = createPin(pins[i]);
-        fragment.appendChild(newPin);
-        addClickListener(newPin, pins[i]);
-      }
-      mapPins.appendChild(fragment);
-    } else {
-      window.ctrlPins.removePinsOnMap();
-    }
-  };
-
   window.ctrlPins = {
+    renderPins: function (pins) {
+      if (pins.length !== 0) {
+        var lenPin = (pins.length > NUMBER_OF_PINS) ? NUMBER_OF_PINS : pins.length;
+        var mapPins = document.querySelector('.map__pins');
+        var fragment = document.createDocumentFragment();
+        for (var i = 0; i < lenPin; i++) {
+          var newPin = createPin(pins[i]);
+          fragment.appendChild(newPin);
+          addClickListener(newPin, pins[i]);
+        }
+        mapPins.appendChild(fragment);
+      } else {
+        window.ctrlPins.removePinsOnMap();
+      }
+    },
+
     createPinsOnMap: function () {
       window.sendRequest(null, 'load', function (pins) {
         window.dataPins = pins.slice();
-        window.renderPins(window.dataPins);
+        window.ctrlPins.renderPins(window.dataPins);
       });
     },
 
@@ -61,12 +64,10 @@
         var pin = pins[i];
         pin.parentElement.removeChild(pin);
       }
-      window.removeCard();
+      window.card.removeCard();
     },
 
     resetMainPin: function () {
-      var INIT_LEFT_MAIN_PIN = 570;
-      var INIT_TOP_MAIN_PIN = 375;
       var pinMain = map.querySelector('.map__pin--main');
       pinMain.style.left = INIT_LEFT_MAIN_PIN + 'px';
       pinMain.style.top = INIT_TOP_MAIN_PIN + 'px';

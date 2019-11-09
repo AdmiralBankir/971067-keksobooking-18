@@ -2,6 +2,8 @@
 
 (function () {
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+  var DEFAULT_AVATAR_PREVIEW = 'img/muffin-grey.svg';
+  var DEFAULT_PHOTO_PREVIEW = '#e4e4de';
 
   var loadFile = function (inputChooser, outElement) {
     inputChooser.addEventListener('change', function () {
@@ -37,5 +39,10 @@
 
   loadFile(fileAvatarChooser, preview);
   loadFile(filePhotoChooser, photo);
+
+  window.reloadFiles = function () {
+    preview.src = DEFAULT_AVATAR_PREVIEW;
+    photo.style.background = DEFAULT_PHOTO_PREVIEW;
+  };
 
 })();

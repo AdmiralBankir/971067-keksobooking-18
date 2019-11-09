@@ -5,8 +5,8 @@
   var map = document.querySelector('.map');
 
   var checkCoord = function (pin) {
-    var bottomBorder = window.MAX_Y_MAP - mapPinMain.offsetHeight;
-    var topBorder = window.MIN_Y_MAP - mapPinMain.offsetHeight;
+    var bottomBorder = window.window.util.MAX_Y_MAP - mapPinMain.offsetHeight;
+    var topBorder = window.window.util.MIN_Y_MAP - mapPinMain.offsetHeight;
 
     pin.yCoord = (pin.yCoord > bottomBorder) ? bottomBorder : pin.yCoord;
     pin.yCoord = (pin.yCoord < topBorder) ? topBorder : pin.yCoord;
