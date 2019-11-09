@@ -4,9 +4,9 @@
   var map = document.querySelector('.map');
   var adForm = document.querySelector('.ad-form');
   var adFormFieldsets = adForm.querySelectorAll('fieldset');
-  var mapFilters = document.querySelector('.map__filters');
   var mapPinMain = map.querySelector('.map__pin--main');
   var select = adForm.querySelector('#type');
+  var resetForm = document.querySelector('.ad-form__reset');
   var flagCreatePins = false;
 
   var setPageState = function (state) {
@@ -33,29 +33,40 @@
       it.disabled = !state;
     });
 
-    mapFilters.disabled = !state;
+    window.formCtrl.setMapFilterState(!state);
 
     window.formCtrl.setAddress();
 
     window.formCtrl.setMinPrice(select);
   };
 
-  setPageState(false);
+  var pageInitialization = function () {
+    setPageState(false);
 
-  flagCreatePins = true;
+    flagCreatePins = true;
 
-  mapPinMain.addEventListener('mousedown', function () {
-    setPageState(true);
-  });
+    mapPinMain.addEventListener('mousedown', function () {
+      setPageState(true);
+    });
 
-  mapPinMain.addEventListener('keydown', function (evt) {
-    window.util.isEnterEvent(evt, setPageState(true));
-  });
+    mapPinMain.addEventListener('keydown', function (evt) {
+      window.util.isEnterEvent(evt, setPageState(true));
+    });
+  };
+
+  pageInitialization();
 
   window.pageStateCtrl = {
     deactivatePage: function () {
       setPageState(false);
       flagCreatePins = true;
+      window.formCtrl.resetForm();
+      window.ctrlPins.removePinsOnMap();
+      window.ctrlPins.resetMainPin();
     }
   };
+
+  resetForm.addEventListener('click', function () {
+    window.pageStateCtrl.deactivatePage();
+  });
 })();
