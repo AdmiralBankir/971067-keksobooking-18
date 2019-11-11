@@ -9,7 +9,7 @@
     PALACE: 'Дворец'
   };
 
-  var FEATURES_LIST = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+  var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
   var map = document.querySelector('.map');
   var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
@@ -91,7 +91,7 @@
   };
 
   var setCardFeatures = function (card, features) {
-    FEATURES_LIST.forEach(function (feature) {
+    FEATURES.forEach(function (feature) {
       var featureListElement = card.querySelector('.popup__feature' + '--' + feature);
       if (!features.includes(feature)) {
         window.util.removeElement(featureListElement);

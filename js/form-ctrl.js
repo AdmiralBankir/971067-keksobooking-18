@@ -17,6 +17,8 @@
   var adFormFeatures = adForm.querySelectorAll('.features input[type=checkbox]');
   var adFormTimein = adForm.querySelector('#timein option[value="12:00"]');
   var adFormTimeout = adForm.querySelector('#timeout option[value="12:00"]');
+  var roomNumberDefault = roomNumber.querySelector('option[value="1"]');
+  var adFormDescription = adForm.querySelector('#description');
 
   var MinPriceForType = {
     BUNGALO: 0,
@@ -65,6 +67,7 @@
         it.selected = false;
       } else {
         it.disabled = false;
+        it.selected = true;
       }
     });
   };
@@ -139,6 +142,11 @@
 
       adFormTimein.selected = true;
       adFormTimeout.selected = true;
+
+      roomNumberDefault.selected = true;
+      onRoomNumberChange();
+
+      adFormDescription.value = '';
     }
   };
 
