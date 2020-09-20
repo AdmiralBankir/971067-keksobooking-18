@@ -4,8 +4,8 @@
   var SUCCESS_SERVER_CONNECTION = 200;
 
   window.sendRequest = function (data, type, onSuccess) {
-    var urlUpLoad = 'https://js.dump.academy/keksobooking';
-    var urlLoad = 'https://js.dump.academy/keksobooking/data';
+    var urlUpLoad = 'https://javascript.pages.academy/keksobooking';
+    var urlLoad = 'https://javascript.pages.academy/keksobooking/data';
     var xhr = new XMLHttpRequest();
     var message;
     var error = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
